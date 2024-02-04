@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+    <link rel="stylesheet" href="index.css">
+    <!-- Add this line to include the JavaScript file -->
+    <script defer src="index.js"></script>
+</head>
+
+<body>
+    <div class="todo-box">
+        <nav>
+            <a href="/" style="color: #fff; text-decoration: none;">Professional Todo App</a>
+        </nav>
+
+        <div class="container">
+            <form action="/add/todo" method="POST">
+                <input type="text" name="todo" placeholder="Enter New Todo">
+                <input type="submit" value="Add Todo">
+            </form>
+
+            <ul>
+                <% todo.forEach(todos => { %>
+                <!-- Add the "todo-item" class to each todo item -->
+                <li class="todo-item">
+                    <span class="timestamp"><%= new Date(todos.timestamp).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' }) %></span>
+                    <!-- Add the "todo-content" class to the todo content -->
+                    <span class="todo-content"><%= todos.todo %></span>
+                    <a href="/delete/todo/<%= todos._id %>" class="delete-btn">Delete</a>
+                </li>
+                <% }) %>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Add the modal HTML here -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2>Todo Details</h2>
+            <p id="modal-content"></p>
+        </div>
+    </div>
+</body>
+
+</html>
